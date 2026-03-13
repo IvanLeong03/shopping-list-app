@@ -27,10 +27,10 @@ export const ItemTable = ({ items, onEdit } : ItemTableProps) => {
             grid grid-cols-10 pb-4 border-b border-[#31572c]/10
             text-xs font-bold uppercase tracking-widest text-[#31572c]/50
             ">
-                <div className="col-span-3 text-left ">Item Name</div>
+                <div className="col-span-4 text-left ">Item Name</div>
                 <div className="col-span-2 text-left ">Category</div>
                 <div className="col-span-2 text-left ">Price</div>
-                <div className="col-span-2 text-left ">Priority</div>
+                <div className="col-span-1 text-left ">Priority</div>
             </div>
 
             <div className="flex flex-col">
@@ -39,7 +39,7 @@ export const ItemTable = ({ items, onEdit } : ItemTableProps) => {
                     key={item.id} 
                     className="grid grid-cols-10 py-4 border-b border-[#31572c]/5
                     items-center hover:bg-[#ecf39e]/10 transition-colors group">
-                        <div className="col-span-3 font-medium text-[#31572c]/70 text-left">
+                        <div className="col-span-4 font-medium text-[#31572c]/70 text-left line-clamp-1 overflow-hidden">
                             {item.name}
                         </div>
                         <div className="col-span-2 text-sm text-[#31572c]/70 text-left">
@@ -48,7 +48,7 @@ export const ItemTable = ({ items, onEdit } : ItemTableProps) => {
                         <div className="col-span-2 text-sm font-mono text-[#31572c]/70 text-left">
                             {item.price.toLocaleString()} {item.currency} 
                         </div>
-                        <div className="col-span-2 text-left">
+                        <div className="col-span-1 text-left">
                             <PriorityBadge priority={item.priority}/>
                         </div>
 
