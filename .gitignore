@@ -21,3 +21,6 @@ yarn-error.log*
 # IDE settings
 .vscode/
 .idea/
+
+out/
+build/
