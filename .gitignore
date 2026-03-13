@@ -1,6 +1,23 @@
-node_modules
-dist
-out
+# Build output (The installers and compiled code)
+dist/
+dist-electron/
+
+# Dependencies (The millions of files in node_modules)
+node_modules/
+
+# Environment variables (Sensitive info like API keys)
+.env
+.env.*
+
+# OS-specific files (Mac junk)
 .DS_Store
-.eslintcache
-*.log*
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE settings
+.vscode/
+.idea/
