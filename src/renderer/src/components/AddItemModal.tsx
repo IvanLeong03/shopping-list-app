@@ -51,7 +51,7 @@ export const AddItemModal = ({ isOpen, onClose, onSave, onDelete, initialData }:
     }
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 backdrop-blur-sm">
+        <div className="fixed inset-0 bg-black/50 flex items-start justify-center z-50 backdrop-blur-sm overflow-y-auto py-8">
             <div className="bg-[#ECF39E] p-8 rounded-lg w-112.5 border border-[#31572c]/20 shadow-xl">
                 <h2 className="text-[#31572c] text-xl font-bold mb-6">
                     {initialData ? 'Edit Item' : 'Add New Item'}
@@ -138,23 +138,34 @@ export const AddItemModal = ({ isOpen, onClose, onSave, onDelete, initialData }:
                         {formData.urls.map((url, index) => (
                             <div key={index} className="flex flex-col">
                                 <div className="grid grid-cols-[1fr_24px] gap-1 items-center mb-2">
-                                    <input 
-                                        type="url"
-                                        placeholder="https://..."
-                                        className="w-full my-1 bg-white/90 rounded-2xl border border-[#d9d9d9] p-2 focus:outline-none"
-                                        value={url}
-                                        onChange={(e) => {
-                                            const newUrls = [...formData.urls];
-                                            newUrls[index] = e.target.value;
-                                            setFormData({ ...formData, urls: newUrls});
-                                        }}
-                                    />
-                                    {formData.urls.length > 1 ? (
+                                    {url ? (
+                                        <a
+                                            href={url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="w-full my-1 px-2 py-2 text-sm text-[#31572c] underline truncate"
+                                        >
+                                            {url}
+                                        </a>
+                                    ) : (
+                                        <input
+                                            type="url"
+                                            placeholder="https://..."
+                                            className="w-full my-1 bg-white/90 rounded-2xl border border-[#d9d9d9] p-2 focus:outline-none"
+                                            value={url}
+                                            onChange={(e) => {
+                                                const newUrls = [...formData.urls];
+                                                newUrls[index] = e.target.value;
+                                                setFormData({ ...formData, urls: newUrls });
+                                            }}
+                                        />
+                                    )}
+                                    {url || formData.urls.length > 1 ? (
                                         <button
                                             type="button"
                                             onClick={() => {
                                                 const newUrls = formData.urls.filter((_, i) => i !== index);
-                                                setFormData({ ...formData, urls:newUrls });
+                                                setFormData({ ...formData, urls: newUrls.length > 0 ? newUrls : [''] });
                                             }}
                                             className="w-8 h-8 flex items-center justify-center tracking-wide hover:text-red-600"
                                         >
@@ -162,10 +173,10 @@ export const AddItemModal = ({ isOpen, onClose, onSave, onDelete, initialData }:
                                         </button>
                                     ) : (
                                         <div className="w-8" />
-                                    )}                                
+                                    )}
                                 </div>
 
-                                {index === formData.urls.length - 1 && (
+                                {index === formData.urls.length - 1 && url !== '' && (
                                     <button
                                         type="button"
                                         onClick={() => setFormData({ ...formData, urls: [...formData.urls, ''] })}
@@ -175,7 +186,7 @@ export const AddItemModal = ({ isOpen, onClose, onSave, onDelete, initialData }:
                                         Add another URL
                                     </button>
                                 )}
-                            </div>                          
+                            </div>
                         ))}                            
                     </div>
                                                                 
@@ -188,7 +199,7 @@ export const AddItemModal = ({ isOpen, onClose, onSave, onDelete, initialData }:
                                     onClick={() => {
                                         if(confirm('Delete this item')) onDelete(initialData.id)
                                     }}
-                                    className="text-red-500 text-xs font-bold hover:underline"
+                                    className="text-red-500/50 font-bold hover:underline hover:text-red-500"
                                 >
                                     Delete Item
                                 </button>

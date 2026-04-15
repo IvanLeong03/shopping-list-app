@@ -16,7 +16,7 @@ export const Sidebar = ({ selectedCategory, onSelect }: SidebarProps) => {
     const categories = Array.from(new Set(items.map(item => item.category)))
 
     return (
-        <aside className="w-64 h-screen bg-[#31572c] text-white/80 p-6 flex flex-col gap-4">
+        <aside className="w-64 h-screen bg-[#31572c] text-white/80 p-6 flex flex-col gap-4 overflow-y-scroll">
             <h1 className="text-xl font-bold mb-8 text-[#ecf39e] tracking-tight">Shopping List</h1>
             
             <nav className='flex-1 px-4'>

@@ -13,6 +13,7 @@ function App(): React.JSX.Element {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingItem, setEditingItem] = useState<ShoppingItem | null>(null)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const handleEditClick = (item: ShoppingItem) => {
     setEditingItem(item)
@@ -43,10 +44,13 @@ function App(): React.JSX.Element {
     setEditingItem(null)
   }
 
+  
+
   const filteredItems = items.filter(item => {
-    if (selectedCategory === 'all') return true;
     if (selectedCategory === 'high-priority') return item.priority === 'High';
-    return item.category === selectedCategory;
+    if (selectedCategory !== 'all' && item.category !== selectedCategory) return false;
+    if (searchQuery.trim()) return item.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return true;
   });
 
   return (
@@ -66,6 +70,14 @@ function App(): React.JSX.Element {
                   {selectedCategory === 'all' ? 'All Items' : 
                   selectedCategory === 'high-priority' ? 'High Priority' : selectedCategory}
                 </h2>
+                {/* search bar */}
+                <input
+                  className='rounded-lg border border-[#31572c]/30 focus:outline-[#31572c]/50 px-2 py-0.5'
+                  type='search'
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                />
+
                 <button 
                 onClick={handleAddClick}
                 className="bg-[#31572c] text-[#ecf39e] px-4 py-2 rounded-md font-medium hover:opacity-90 transition-opacity"
