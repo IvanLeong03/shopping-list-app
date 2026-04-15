@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useShoppingList } from "@renderer/context/ShoppingListProvider";
 import { ShoppingItem, Priority, Status } from "src/shared/types";
+import { TiDelete } from "react-icons/ti";
 
 interface ModalProps {
     isOpen: boolean;
@@ -64,7 +65,7 @@ export const AddItemModal = ({ isOpen, onClose, onSave, onDelete, initialData }:
                         <input 
                             required
                             className="
-                            w-full my-1 bg-white/90 rounded-lg border border-[#d9d9d9] p-2
+                            w-full my-1 bg-white/90 rounded-xl border border-[#d9d9d9] p-2
                             focus:outline-none focus:border-[#31572c]
                             "
                             value={formData.name}
@@ -99,7 +100,7 @@ export const AddItemModal = ({ isOpen, onClose, onSave, onDelete, initialData }:
                                 type="number"
                                 placeholder="0"
                                 onFocus={(e) => e.target.select()}
-                                className="w-full my-1 bg-white/90 rounded-lg border border-[#d9d9d9] p-2 focus:outline-none focus:border-[#31572c]"
+                                className="w-full my-1 bg-white/90 rounded-xl border border-[#d9d9d9] p-2 focus:outline-none focus:border-[#31572c]"
                                 value={formData.price}
                                 onChange={e => setFormData({...formData, price: Number(e.target.value)})}
                             />
@@ -136,11 +137,11 @@ export const AddItemModal = ({ isOpen, onClose, onSave, onDelete, initialData }:
                         </label>
                         {formData.urls.map((url, index) => (
                             <div key={index} className="flex flex-col">
-                                <div className="grid grid-cols-[1fr_24px] gap-4 items-center mb-2">
+                                <div className="grid grid-cols-[1fr_24px] gap-1 items-center mb-2">
                                     <input 
                                         type="url"
                                         placeholder="https://..."
-                                        className="w-full my-1 bg-white/90 rounded-lg border border-[#d9d9d9] p-2 focus:outline-none"
+                                        className="w-full my-1 bg-white/90 rounded-2xl border border-[#d9d9d9] p-2 focus:outline-none"
                                         value={url}
                                         onChange={(e) => {
                                             const newUrls = [...formData.urls];
@@ -155,9 +156,9 @@ export const AddItemModal = ({ isOpen, onClose, onSave, onDelete, initialData }:
                                                 const newUrls = formData.urls.filter((_, i) => i !== index);
                                                 setFormData({ ...formData, urls:newUrls });
                                             }}
-                                            className="w-8 h-8 flex items-center justify-center tracking-wide"
+                                            className="w-8 h-8 flex items-center justify-center tracking-wide hover:text-red-600"
                                         >
-                                            x
+                                            <TiDelete />
                                         </button>
                                     ) : (
                                         <div className="w-8" />

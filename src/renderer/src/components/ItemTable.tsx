@@ -8,8 +8,8 @@ interface ItemTableProps {
 // Small helper component for the Priority Badge
 const PriorityBadge = ({ priority }: { priority: string }) => {
   const colors = {
-    High: ' text-red-700',
-    Medium: 'bg-orange-100 text-orange-700',
+    High: 'bg-red-100 text-red-700',
+    Medium: 'bg-yellow-100 text-amber-700',
     Low: 'bg-blue-100 text-blue-700'
   }
   
@@ -39,7 +39,7 @@ export const ItemTable = ({ items, onEdit } : ItemTableProps) => {
                     key={item.id} 
                     className="grid grid-cols-10 py-4 border-b border-[#31572c]/5
                     items-center hover:bg-[#ecf39e]/10 transition-colors group">
-                        <div className="col-span-4 font-medium text-[#31572c]/70 text-left line-clamp-1 overflow-hidden">
+                        <div className="col-span-4 mr-2 font-medium text-[#31572c]/70 text-left line-clamp-1 overflow-hidden">
                             {item.name}
                         </div>
                         <div className="col-span-2 text-sm text-[#31572c]/70 text-left">
